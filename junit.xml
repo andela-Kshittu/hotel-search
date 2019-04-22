@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="1" failures="0" time="1.746">
+  <testsuite name="Test create approval." errors="0" failures="0" skipped="0" timestamp="2019-04-22T21:06:09" time="1.462" tests="1">
+    <testcase classname="Test create approval. It should create approval request" name="Test create approval. It should create approval request" time="0.004">
+    </testcase>
+  </testsuite>
+</testsuites>

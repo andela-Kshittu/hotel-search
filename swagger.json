@@ -1,0 +1,166 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "StormX server",
+    "version": "1.0.0",
+    "title": "StormX API documentation",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "kehesjay@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Add new user",
+        "description": "Adds a new user record",
+        "operationId": "addUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "status": true,
+              "$ref": "#/definitions/AuthResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Skill not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/users/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Login",
+        "description": "Login as a user",
+        "operationId": "login",
+        "produces": [
+          "application/json"
+        ],        
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User login payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "status": true,
+              "$ref": "#/definitions/AuthResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Skill not found"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "x-access-token",
+      "in": "header"
+    }
+  },
+  "definitions": {
+    "AuthPayload": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email address"
+        },
+        "password": {
+          "type": "string",
+          "description": "User password"
+        }
+      }
+    },
+    "AuthResponse": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "JWT token"
+        }
+      }
+    },
+    "UserPayload": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email address"
+        },
+        "password": {
+          "type": "string",
+          "description": "User password"
+        },
+        "type" : {
+          "type": "string",
+          "description": "Type of user [ Admin or User ]"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about StormX",
+    "url": "https://www.stormx.io/"
+  }
+}

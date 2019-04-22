@@ -1,0 +1,7 @@
+.package-lock.json
+.env
+node_modules
+npm-debug.log
+.DS_Store
+yarn-error.log
+/coverage
