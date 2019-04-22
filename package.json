@@ -29,5 +29,8 @@
     "jest": "^24.7.1",
     "jest-junit": "^6.3.0",
     "supertest": "^4.0.2"
+  },
+  "engines": {
+    "node": "8.9.4"
   }
 }
