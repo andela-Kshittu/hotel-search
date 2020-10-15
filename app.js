@@ -32,7 +32,7 @@ mongoose.Promise = global.Promise;
 
 // Connecting to the database
 mongoose
-  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
+  .connect(process.env.ORMONGO_URL, {useNewUrlParser: true})
   .then(() => {
     console.log("Successfully connected to the database");
   })

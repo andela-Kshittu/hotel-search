@@ -1,13 +1,19 @@
 {
   "name": "limehome",
   "description": "limehome test app",
-  "repository": "https://gitlab.com/stormx-inc/code-test/candidates/kenny-s/backend-services",
+  "repository": "https://github.com/andela-Kshittu/hotel-search",
   "scripts": {},
   "env": {
-    "JWT_SECRET": {
+    "HERE_PLACES_API_KEY": {
       "required": true
     },
-    "TOKEN_EXPIRES_IN": {
+    "HERE_PLACES_BROWSE_API_URL": {
+      "required": true
+    },
+    "HERE_PLACES_LOOKUP_API_URL": {
+      "required": true
+    },
+    "HERE_PLACES_HOTEL_CAT": {
       "required": true
     }
   },
@@ -17,7 +23,7 @@
     }
   },
   "addons": [
-    "mongolab"
+    "ormongo"
   ],
   "buildpacks": [
     {

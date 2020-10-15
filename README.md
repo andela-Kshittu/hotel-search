@@ -26,8 +26,8 @@
 
 #### Live version on heroku 
 
-    1. swagger doc : https://limehome.herokuapp.com/api-docs/
-    2. base url : https://limehome.herokuapp.com/api
+    1. swagger doc : https://limehome-hotel.herokuapp.com/api-docs/
+    2. base url : https://limehome-hotel.herokuapp.com/api
 
 #### Assumptions :
 
