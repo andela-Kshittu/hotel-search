@@ -22,12 +22,12 @@
 
 #### 5. Deploy to heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://gitlab.com/stormx-inc/code-test/candidates/kenny-s/backend-services/tree/kshittu-stormx-assessment)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/andela-Kshittu/hotel-search/tree/master)
 
 #### Live version on heroku 
 
-    1. swagger doc : https://stormx.herokuapp.com/api-docs/
-    2. base url : https://stormx.herokuapp.com
+    1. swagger doc : https://limehome.herokuapp.com/api-docs/
+    2. base url : https://limehome.herokuapp.com/api
 
 #### Assumptions :
 
