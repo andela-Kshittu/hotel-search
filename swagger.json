@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "StormX server",
+    "description": "Limehome server",
     "version": "1.0.0",
-    "title": "StormX API documentation",
+    "title": "Limehome API documentation",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "kehesjay@gmail.com"
@@ -13,20 +13,64 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   },
-  "basePath": "/",
+  "basePath": "/api",
   "schemes": [
-    "https",
     "http"
   ],
   "paths": {
-    "/users": {
+    "/properties": {
+      "get": {
+        "tags": [
+          "properties"
+        ],
+        "summary": "Get properties",
+        "description": "Returns the properties(hotel) around Lat/Lon",
+        "operationId": "getProperties",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "lat",
+            "description": "Latitude",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "lon",
+            "description": "Longitude",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "status": true,
+              "$ref": "#/definitions/PropertyDtoList"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "security": []
+      }
+    },
+    "/bookings": {
       "post": {
         "tags": [
-          "users"
+          "bookings"
         ],
-        "summary": "Add new user",
-        "description": "Adds a new user record",
-        "operationId": "addUser",
+        "summary": "Book property",
+        "description": "Book a property",
+        "operationId": "bookProperty",
         "consumes": [
           "application/json"
         ],
@@ -37,10 +81,10 @@
           {
             "in": "body",
             "name": "body",
-            "description": "User payload",
+            "description": "Booking payload",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserPayload"
+              "$ref": "#/definitions/BookingRequestDto"
             }
           }
         ],
@@ -49,43 +93,38 @@
             "description": "successful operation",
             "schema": {
               "status": true,
-              "$ref": "#/definitions/AuthResponse"
+              "$ref": "#/definitions/BookingDto"
             }
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "Bad request"
           },
           "404": {
-            "description": "Skill not found"
+            "description": "Property not found"
           }
         },
         "security": [
-          {
-            "api_key": []
-          }
         ]
       }
     },
-    "/users/login": {
-      "post": {
+    "/properties/{id}/bookings": {
+      "get": {
         "tags": [
-          "users"
+          "properties"
         ],
-        "summary": "Login",
-        "description": "Login as a user",
-        "operationId": "login",
+        "summary": "Get property bookings",
+        "description": "Get all bookings for a property",
+        "operationId": "getPropertyBookings",
         "produces": [
           "application/json"
-        ],        
+        ],
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
-            "description": "User login payload",
+            "in": "path",
+            "name": "id",
+            "description": "property unique identifier",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/AuthPayload"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -93,74 +132,93 @@
             "description": "successful operation",
             "schema": {
               "status": true,
-              "$ref": "#/definitions/AuthResponse"
+              "$ref": "#/definitions/BookingDtoList"
             }
           },
           "400": {
-            "description": "Invalid ID supplied"
+            "description": "Bad request"
           },
           "404": {
-            "description": "Skill not found"
+            "description": "Property not found"
           }
         },
-        "security": [
-          {
-            "api_key": []
-          }
-        ]
+        "security": []
       }
     }
   },
   "securityDefinitions": {
-    "api_key": {
-      "type": "apiKey",
-      "name": "x-access-token",
-      "in": "header"
-    }
   },
   "definitions": {
-    "AuthPayload": {
+    "PropertyDto": {
       "type": "object",
       "properties": {
-        "email": {
+        "id": {
           "type": "string",
-          "description": "Email address"
+          "description": "unique identifier"
         },
-        "password": {
+        "title": {
           "type": "string",
-          "description": "User password"
+          "description": "property name"
         }
       }
     },
-    "AuthResponse": {
-      "type": "object",
+    "PropertyDtoList": {
+      "type": "array",
       "properties": {
-        "token": {
-          "type": "string",
-          "description": "JWT token"
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyDto"
+          }
         }
       }
     },
-    "UserPayload": {
+    "BookingDto": {
       "type": "object",
       "properties": {
-        "email": {
+        "id": {
           "type": "string",
-          "description": "Email address"
+          "description": "Booking ID"
         },
-        "password": {
+        "propertyId": {
           "type": "string",
-          "description": "User password"
+          "description": "Property ID"
         },
-        "type" : {
+        "ownerId": {
           "type": "string",
-          "description": "Type of user [ Admin or User ]"
+          "format": "uuid",
+          "description": "Owner ID"
+        }
+      }
+    },
+    "BookingDtoList": {
+      "type": "array",
+      "properties": {
+        "bookings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BookingDto"
+          }
+        }
+      }
+    },
+    "BookingRequestDto": {
+      "type": "object",
+      "properties": {
+        "propertyId": {
+          "type": "string",
+          "description": "Property ID"
+        },
+        "ownerId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Owner ID"
         }
       }
     }
   },
   "externalDocs": {
-    "description": "Find out more about StormX",
-    "url": "https://www.stormx.io/"
+    "description": "Find out more about Limehome",
+    "url": "https://www.limehome.com/"
   }
 }

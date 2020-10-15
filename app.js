@@ -7,9 +7,8 @@ var bodyParser = require('body-parser');
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-var admin = require('./routes/admin');
-var user = require('./routes/user');
-var transaction = require('./routes/transaction');
+var properties = require('./routes/properties');
+var bookings = require('./routes/booking');
 
 var app = express();
 
@@ -20,21 +19,20 @@ app.use(cors());
 app.options('*', cors())
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-app.use('/admin', admin);
-app.use('/users', user);
-app.use('/transactions', transaction);
+app.use('/api/properties', properties);
+app.use('/api/bookings', bookings);
 
 // Configuring the database
 mongoose.Promise = global.Promise;
 
 // Connecting to the database
 mongoose
-  .connect(process.env.MONGODB_URI, { useNewUrlParser: true })
+  .connect(process.env.MONGODB_URI, {useNewUrlParser: true})
   .then(() => {
     console.log("Successfully connected to the database");
   })
@@ -45,17 +43,17 @@ mongoose
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
-  res.send({ message: err.message });
+  res.send({message: err.message});
 });
 
 module.exports = app;

@@ -1,27 +1,27 @@
 {
-    "name": "stormx",
-    "description": "stormx test app",
-    "repository": "https://gitlab.com/stormx-inc/code-test/candidates/kenny-s/backend-services",
-    "scripts": {},
-    "env": {   
-      "JWT_SECRET": {
-        "required": true
-      },      
-      "TOKEN_EXPIRES_IN": {
-        "required": true
-      }
+  "name": "limehome",
+  "description": "limehome test app",
+  "repository": "https://gitlab.com/stormx-inc/code-test/candidates/kenny-s/backend-services",
+  "scripts": {},
+  "env": {
+    "JWT_SECRET": {
+      "required": true
     },
-    "formation": {
-      "web": {
-        "quantity": 1
-      }
-    },
-    "addons": [
-      "mongolab"
-    ],
-    "buildpacks": [
-      {
-        "url": "heroku/nodejs"
-      }
-    ]
-  }
+    "TOKEN_EXPIRES_IN": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "mongolab"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
