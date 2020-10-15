@@ -20,11 +20,14 @@
 
     From the root directory run : npm test
 
-#### 5. Deploy to heroku
+#### 5. Deploy to heroku (DIY)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/andela-Kshittu/hotel-search/tree/master)
 
-#### Live version on heroku 
+Once deployment is complete you would need to append DB name to the generated ORMONGO_URL env variable in Heroku,
+ just append */limehome* to the existing value and restart your app.
+
+#### Live version already deployed on heroku 
 
     1. swagger doc : https://limehome-hotel.herokuapp.com/api-docs/
     2. base url : https://limehome-hotel.herokuapp.com/api
