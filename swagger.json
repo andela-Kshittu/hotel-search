@@ -38,14 +38,14 @@
             "name": "lat",
             "description": "Latitude",
             "required": true,
-            "type": "integer"
+            "type": "number"
           },
           {
             "in": "query",
             "name": "lon",
             "description": "Longitude",
             "required": true,
-            "type": "integer"
+            "type": "number"
           }
         ],
         "responses": {
