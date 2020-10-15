@@ -15,7 +15,8 @@
   },
   "basePath": "/api",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "paths": {
     "/properties": {
